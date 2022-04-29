@@ -9,5 +9,5 @@ There is a total of 1070 radial velocity curves of host stars containing exoplan
 For host stars not containing exoplanetary systems, raw radial velocity data was retreived from DACE's database [here](https://dace.unige.ch/observationSearch/?observationType=[%22spectroscopy%22]). There is a total of
 __ radial velocity curves of host stars not known to contain exoplanets.
 - Script to Query All RV Targets (exoplanetary and non-exoplanetary systems): 
-- Script to Obtain Non-Exoplanetary Systems and Query Radial Velocity Data: [request_non_exo](all_exo_data_nasa.py)
+- Script to Obtain Non-Exoplanetary Systems and Query Radial Velocity Data: [request_non_exo](request_non_exo_rv.py)
 - Raw Extracted Radial Velocities for Non-Exoplanetary Systems (Pickle): [all_non_exo_data](all_non_exo_data)
