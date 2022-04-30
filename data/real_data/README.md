@@ -3,7 +3,7 @@
 For host stars containing exoplanetary systems, raw radial velocity data was retreived from NASA's Exoplanet Archive's constributed datasets page for radial velocities [here](https://exoplanetarchive.ipac.caltech.edu/bulk_data_download/#TSD).
 There is a total of 1070 radial velocity curves of host stars containing exoplanets.
 - Script to Parse Through Data: [obtain_exo_rv](obtain_exo_rv.py)
-  - Note that data must be first downloaded from NASA before parsing.
+  - Data is not uploaded to this repository and is available at NASA's Exoplanet Archive.
 - Raw Extracted Radial Velocities (Pickle): [all_exo_data_nasa](all_exo_data_nasa)
 
 ### Host Stars Without Exoplanets
