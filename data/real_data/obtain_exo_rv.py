@@ -55,11 +55,11 @@ def parse_files(all_files):
         data = np.stack((dates, rvs))
         all_exo_data_nasa.append(data)
         
-        return all_exo_data_nasa, date_units, rv_units
+    return all_exo_data_nasa, date_units, rv_units
 
 if __name__ == '__main__':
     all_files = glob.glob('dataset/*')
-    all_exo_data_nasa, date_units, rv_units = parsefiles(all_files)
+    all_exo_data_nasa, date_units, rv_units = parse_files(all_files)
     
     # Ensure consistency of units for rv measurements
     assert(np.all([item=='m/s' for item in rv_units]))

@@ -28,7 +28,7 @@ def get_all_exoplanet_names():
 def get_all_non_exoplanet_names(all_exoplanets):
     # Get the names of all systems with spectroscopic data
     observedTargets = None
-    with open('observed_targets_data','rb') as f: 
+    with open('observedTargets','rb') as f: 
         observedTargets = pickle.load(f)
     
     names = observedTargets['obj_id_catname']

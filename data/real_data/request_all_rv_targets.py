@@ -16,6 +16,7 @@ def request_spectroscopic_targets():
     observedTargets = Spectroscopy.query_database(limit=100000)
     
     with open('observedTargets', 'wb') as fp:
-        fp.dump(observedTargets, fp)
-    
-    
+        pickle.dump(observedTargets, fp)
+
+if __name__ == '__main__':
+    request_spectroscopic_targets()
