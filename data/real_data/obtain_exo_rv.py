@@ -27,6 +27,7 @@ def parse_files(all_files):
         # Get index of the rv units:
         rv_id_index = [idx for idx, s in enumerate(lines) if 'VALUE_UNITS' in s][0]
 
+        # Get the date and rv unit types:
         char = "\""
         date_type_idx = [i.start() for i in re.finditer(char, lines[date_id_index])]
         if (len(date_type_idx) == 0):
@@ -58,7 +59,8 @@ def parse_files(all_files):
     return all_exo_data_nasa, date_units, rv_units
 
 if __name__ == '__main__':
-    all_files = glob.glob('dataset/*')
+    # Assume all files are extracted to this relative directory
+    all_files = glob.glob('nasa_rv_dataset/*')
     all_exo_data_nasa, date_units, rv_units = parse_files(all_files)
     
     # Ensure consistency of units for rv measurements
