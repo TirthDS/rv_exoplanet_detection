@@ -87,10 +87,10 @@ def generate_phase_files():
         stellar_rot_periods[i] = np.random.uniform(rotation_periods[0], rotation_periods[1])
     
     # Save stellar rotation periods (for use later)
-    with open('stellar_rot_periods', 'wb') as f:
+    with open('generated_data/stellar_rot_periods', 'wb') as f:
         pickle.dump(stellar_rot_periods, f)
         
-    with open('simulated_rvs_no_solar', 'rb') as f:
+    with open('generated_data/simulated_rvs_no_solar', 'rb') as f:
         simulated_rvs_no_solar_activity = pickle.load(f)
     
     # Generate phase files:
