@@ -73,7 +73,7 @@ def non_exo_stellar_activity_rvs(stellar_rv_files_seen):
     
     simulated_rvs_no_exo = []
 
-    # Retrieve solar rv signals and add Gaussian noise 1m/s
+    # Retrieve solar rv signals and add Gaussian noise 5 m/s
     for file in stellar_rv_files:
         if file not in stellar_rv_files_added_to_exoplanets:
             f = open(file, 'r')
@@ -82,12 +82,12 @@ def non_exo_stellar_activity_rvs(stellar_rv_files_seen):
             f.close()
 
             data = np.array([item.split() for item in rvs]).astype(float)
-            stellar_activity_rvs = data.T[2] + (1 * np.random.randn(len(data.T[2])))
+            stellar_activity_rvs = data.T[2] + (5 * np.random.randn(len(data.T[2])))
             phases = data.T[0]
 
             # Convert phases to back to date times
             rotation_period = float(file[27:-4])
-            max_num_periods_to_extend_to = np.random.randint(2, 4)
+            max_num_periods_to_extend_to = np.random.randint(2, 50)
             n = np.random.randint(1, max_num_periods_to_extend_to, size = len(phases)) 
             dates = (n * rotation_period) + (phases * rotation_period)
             data = np.stack((dates, stellar_activity_rvs))
