@@ -89,7 +89,7 @@ if __name__ == '__main__':
     with open(file, 'wb') as f:
         x_data, y_data = pickle.load(f)
     
-    model = real_base_model()
+    model = real_base_model(x_data.shape[1])
     real_results = fit_and_analysis(model, x_data, y_data, 0.2, 32)
     print("Real RV Test Results: " + str(real_results))
     
@@ -98,6 +98,6 @@ if __name__ == '__main__':
     with open(file, 'wb') as f:
         x_data, y_data = pickle.load(f)
     
-    model = simulated_base_model()
+    model = simulated_base_model(x_data.shape[1])
     sim_results = fit_and_analysis(model, x_data, y_data, 0.1, 32)
     print("Simulated RV Test Results: " + str(sim_results))
