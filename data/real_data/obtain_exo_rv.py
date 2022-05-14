@@ -9,6 +9,14 @@ import re
 import pickle
 
 def parse_files(all_files):
+    '''
+    Parses through the directory containing all of NASA's contributed
+    radial velocity curves for exoplanetary systems and saves the data.
+
+    Params:
+        - 'all_files': a list containing all of the files storing the RV data
+    '''
+
     all_exo_data_nasa = []
     date_units = []
     rv_units = []

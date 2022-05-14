@@ -1,11 +1,6 @@
 import pickle
 from dace.spectroscopy import Spectroscopy
 
-'''
-Request spectroscopic candidates with radial velocity data from DACE database.
-Save requests to a file (large).
-'''
-
 def request_spectroscopic_targets():
     '''
     Query 100,000 spectroscopic targets (most will be duplicates, but this ensures we get almost all unique targets)

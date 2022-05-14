@@ -1,6 +1,9 @@
 '''
 Retrieve radial velocity time-series data from DACE database of systems
 not known to have any exoplanets.
+
+
+DACE: https://dace.unige.ch/dashboard/index.html
 '''
 
 import numpy as np
@@ -10,6 +13,13 @@ import pickle
 import itertools
 
 def get_all_exoplanet_names():
+    '''
+    Obtain a set of all host star names that contain exoplanets.
+
+    Returns:
+        - set of all the host star names
+    '''
+
     exoplanet_data = Exoplanet.query_database(limit = 50000)
     pl_names = exoplanet_data['obj_id_catname']
     
@@ -26,6 +36,17 @@ def get_all_exoplanet_names():
     return all_exoplanets
 
 def get_all_non_exoplanet_names(all_exoplanets):
+    '''
+    Obtain a list of all host star names that do not have exoplanets, cross-referencing
+    the set of exoplanetary systems so that the too classes do not overlap.
+
+    Params:
+        - 'all_exoplanets': a set of all the host star names containing exoplanets
+
+    Returns:
+        - A set of the names of all the systems not confirmed to have exoplanets.
+    '''
+
     # Get the names of all systems with spectroscopic data
     observedTargets = None
     with open('observedTargets','rb') as f: 
@@ -58,6 +79,16 @@ def get_all_non_exoplanet_names(all_exoplanets):
     return non_exoplanet_names
 
 def request_rv_data(all_non_exoplanet_names):
+    '''
+    Obtain the radial velocity data of the non-exoplanetary systems, querying DACE's online
+    Spectroscopy database. Saves the data to a pickle file.
+
+    Params:
+        - 'all_non_exoplanet_names': the set of the names of all host stars not confirmed
+                                    to have exoplanets
+    '''
+
+
     all_rv_non_exoplanet_data = []
     count = 0
     for name in all_non_exoplanet_names:
