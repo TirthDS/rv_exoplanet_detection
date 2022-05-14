@@ -21,11 +21,9 @@ import configparser
 
 def simulate_exoplanet_rvs():
     '''
-    Randomly generate 10,000 radial velocity curves and add 1 m/s Gaussian noise
-    to simulate future radial velocity precision. Saves the radial velocity data
-    to a pickle file: 'simulated_rvs_no_solar'.
+    Randomly generate 10,000 radial velocity curves using Monte Carlo
+    approach. Saves the radial velocity data to a pickle file: 'simulated_rvs_no_solar'.
     '''
-    inst_err = 1 # m/s
     
     # Define ranges of parameter values
     num_measurements = (10, 100) # Number of rv-measurements to simulate

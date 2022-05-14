@@ -9,16 +9,15 @@ def simulated_base_model(feature_length):
     Defines the baseline fully-connected neural network model
     for the simulated data.
     
-    Inputs:
+    Params:
         - 'feature_length': the number of features for this dataset
         
-    Outputs:
+    Returns:
         - The model being trained on.
     '''
     
     X_input = layers.Input(feature_length,)
     X = layers.Dense(64, activation='relu')(X_input)
-    X = layers.Dense(64, activation='relu')(X)
     X = layers.Dense(1, activation='sigmoid')(X)
     model = models.Model(inputs = X_input, outputs=X, name='baseline_simulated')
     
@@ -29,11 +28,11 @@ def real_base_model(feature_length):
     Defines the baseline fully-connected neural network model
     for the real rv data.
     
-    Inputs:
+    Params:
         - 'feature_length': the number of features for this dataset (will be different
                             than the simulated data)
     
-    Outputs:
+    Returns:
         - The model being trained on.
     '''
 
@@ -50,7 +49,7 @@ def fit_and_analysis(model, x_data, y_data, dev_test_split, epochs, batch_size):
     based off of the training set. Fits the appropriate model, evaluates on the test
     set and returns test loss, accuracy, precision, and recall.
     
-    Inputs:
+    Params:
         - 'model': the model being used for fitting
         - 'x_data': the extracted features for each system
         - 'y_data': the labels (0 for non-exoplanet, 1 for exoplanets
@@ -58,7 +57,7 @@ def fit_and_analysis(model, x_data, y_data, dev_test_split, epochs, batch_size):
         - 'epochs': the number of iterations to train for
         - 'batch_size': the size of batches to use for batch gradient descent 
     
-    Outputs:
+    Returns:
         - An array of test loss, accuracy, precision, and recall.
     '''
     # Split data and normalize feature-wise
@@ -90,7 +89,7 @@ if __name__ == '__main__':
         x_data, y_data = pickle.load(f)
     
     model = real_base_model(x_data.shape[1])
-    real_results = fit_and_analysis(model, x_data, y_data, 0.2, 32)
+    real_results = fit_and_analysis(model, x_data, y_data, 0.2, 15, 32)
     print("Real RV Test Results: " + str(real_results))
     
     # Run model on simulated rv data
@@ -99,5 +98,5 @@ if __name__ == '__main__':
         x_data, y_data = pickle.load(f)
     
     model = simulated_base_model(x_data.shape[1])
-    sim_results = fit_and_analysis(model, x_data, y_data, 0.1, 32)
+    sim_results = fit_and_analysis(model, x_data, y_data, 0.1, 5, 32)
     print("Simulated RV Test Results: " + str(sim_results))

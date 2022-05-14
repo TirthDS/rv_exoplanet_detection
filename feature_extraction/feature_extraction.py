@@ -10,7 +10,7 @@ def extract_features(exo_data_dir, non_exo_data_dir, extracted_features_save_dir
     and non_exo data into a single dataframe, with each row
     containing a single rv measurement.
     
-    Inputs:
+    Params:
         - 'exo_data_dir': name/directory of raw exoplanetary rv measurements (pickle)
         - 'non_exo_data_dir': name/directory of raw non-exoplanetary rv measurements (pickle)
         - 'extracted_features_save_dir': name/directory to save extracted features (pickle)

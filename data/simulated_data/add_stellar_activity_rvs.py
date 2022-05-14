@@ -13,7 +13,9 @@ import glob
 def exo_stellar_activity_rvs():
     '''
     Uses 10,000 of the randomly generated stellar activity radial velocity curves
-    from SOAP 2.0 and adds them to the 10,000 exoplanet radial velocity curves.
+    from SOAP 2.0 and adds them to the 10,000 exoplanet radial velocity curves. Applies
+    a Guassian error of 5 m/s to simulate instrumental error and other random stellar
+    activity.
     
     This function assumes that stellar rotation periods used for SOAP 2.0
     have been saved ('stellar_rot_periods') and solar rv curves have been fully
@@ -49,7 +51,7 @@ def exo_stellar_activity_rvs():
         data = np.array([item.split() for item in rvs]).astype(float)
         stellar_activity_rvs = data.T[2]
         exoplanet_rvs = exo_rvs[i][1]
-        new_rv = stellar_activity_rvs + exoplanet_rvs
+        new_rv = stellar_activity_rvs + exoplanet_rvs + (5 * np.random.randn(len(exoplanet_rvs)))
         dates = exo_rvs[i][0]
 
         data = np.stack((dates, new_rv))
