@@ -15,6 +15,10 @@ def parse_files(all_files):
 
     Params:
         - 'all_files': a list containing all of the files storing the RV data
+
+    Returns:
+        - a list of all the radial velocity data (times, rvs), a list of each star's date units,
+          and a list of each star's rv measurement units (to check for unit consistency)
     '''
 
     all_exo_data_nasa = []
