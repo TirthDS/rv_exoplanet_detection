@@ -62,7 +62,7 @@ def fit_and_analysis(model, x_data, y_data, dev_test_split, epochs, batch_size):
     '''
     # Split data and normalize feature-wise
     x_train, x_test, y_train, y_test = train_test_split(x_data, y_data, test_size=dev_test_split, random_state=0)
-    x_train, x_val, y_train, y_val = train_test_split(x_train, y_train, test_size=(dev_test_split) / (1-dev_test_split) , random_state=0)
+    x_train, x_val, y_train, y_val = train_test_split(x_train, y_train, test_size=(dev_test_split) / (1-dev_test_split), random_state=0)
     
     # Normalize
     normalizer = preprocessing.StandardScaler()
@@ -85,18 +85,18 @@ def fit_and_analysis(model, x_data, y_data, dev_test_split, epochs, batch_size):
 if __name__ == '__main__':
     # Run model on real rv data
     file = '../feature_extraction/real_rv_data_features_extracted'
-    with open(file, 'wb') as f:
-        x_data, y_data = pickle.load(f)
+    with open(file, 'rb') as f:
+        x_data_real, y_data_real = pickle.load(f)
     
-    model = real_base_model(x_data.shape[1])
-    real_results = fit_and_analysis(model, x_data, y_data, 0.2, 15, 32)
+    model = real_base_model(x_data_real.shape[1])
+    real_results = fit_and_analysis(model, x_data_real, y_data_real, 0.2, 15, 32)
     print("Real RV Test Results: " + str(real_results))
     
     # Run model on simulated rv data
     file = '../feature_extraction/simulated_rv_data_features_extracted'
-    with open(file, 'wb') as f:
+    with open(file, 'rb') as f:
         x_data, y_data = pickle.load(f)
     
     model = simulated_base_model(x_data.shape[1])
-    sim_results = fit_and_analysis(model, x_data, y_data, 0.1, 5, 32)
+    sim_results = fit_and_analysis(model, x_data_real, y_data_real, 0.1, 5, 32)
     print("Simulated RV Test Results: " + str(sim_results))
