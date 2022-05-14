@@ -95,8 +95,8 @@ if __name__ == '__main__':
     # Run model on simulated rv data
     file = '../feature_extraction/simulated_rv_data_features_extracted'
     with open(file, 'rb') as f:
-        x_data, y_data = pickle.load(f)
+        x_data_sim, y_data_sim = pickle.load(f)
     
-    model = simulated_base_model(x_data.shape[1])
-    sim_results = fit_and_analysis(model, x_data_real, y_data_real, 0.1, 5, 32)
+    model = simulated_base_model(x_data_sim.shape[1])
+    sim_results = fit_and_analysis(model, x_data_sim, y_data_sim, 0.1, 5, 32)
     print("Simulated RV Test Results: " + str(sim_results))
