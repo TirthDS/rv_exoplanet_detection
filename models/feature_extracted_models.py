@@ -133,7 +133,7 @@ if __name__ == '__main__':
     
     model = real_base_model(x_data_real.shape[1])
     train, val, test = preprocess(x_data_real, y_data_real, 0.2)
-    history = model.fit(model, train, val, 15, 32, 0.001, 0.27)
+    history = model.fit(model, train, val, 15, 32, 0.001, 0.2)
     print('Real Data Model: ')
     loss, acc, recall, precision, auc = evaluate(model, test)
     
