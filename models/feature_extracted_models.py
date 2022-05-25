@@ -23,7 +23,7 @@ def simulated_base_model(feature_length):
     X = layers.Dense(512, activation = 'relu')(X)
     X = layers.Dense(1, activation='sigmoid')(X)
     
-    model = models.Model(inputs = X_input, outputs=X, name='baseline')
+    model = models.Model(inputs = X_input, outputs=X, name='baseline_sim')
     
     return model
 
@@ -31,7 +31,7 @@ def real_base_model(feature_length):
     '''
     Defines the baseline fully-connected neural network model
     for the real rv data. Number of units in hidden layer was 
-    optimized using Keras' tensor band.
+    optimized using Keras' hyperband.
     
     Params:
         - 'feature_length': the number of features for this dataset (will be different
