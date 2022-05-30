@@ -151,6 +151,9 @@ def load_data(exo_file, non_exo_file, max_length = 100, split = 0.2):
         - 'non_exo_file': path to file containing the rv data for non-exoplanetary systems
         - 'max_length': the maximum number of data points to pad/truncate to
         - 'split': the train/dev/test split to use (1-split/split/split)
+    
+    Returns:
+        - Tuples of the train/dev/test sets
     '''
     with open(exo_file, 'rb') as f:
         exo_data = pickle.load(f)
