@@ -9,6 +9,7 @@ from sklearn import preprocessing
 from tensorflow import keras
 from tensorflow.keras import layers, models, metrics, optimizers
 import pickle
+from metrics import confusion_matrix, precision_recall_tradeoff_curve
 
 def preprocess(rv_data, max_length = 100):
     '''
@@ -171,22 +172,40 @@ if __name__ == '__main__':
     file1 = '../data/real_data/all_exo_data_nasa'
     file2 = '../data/real_data/all_non_exo_data'
     train_real, val_real, test_real = load_data(file1, file2)
+    threshold_real = 0.3
     
+    # Fit model
     model_real = real_cnn_lstm_model()
-    history_real = fit(model_real, train_real, val_real, 15, 32, 0.001, 0.3)
+    history_real = fit(model_real, train_real, val_real, 15, 32, 0.001, threshold_real)
     model_real.save('real_lstm_model')
+    
+    # Evaluate and generate predictions
     print('Real Data Model: ')
     loss_real, acc_real, recall_real, precision_real, auc_real = evaluate(model_real, test_real)
+    predictions = (model_real.predict(test_real[0]) >= threshold_real).astype(float)
+    
+    # Generate metric plots
+    confusion_matrix(test_real[1], predictions, 'real_cnn_lstm')
+    precision_recall_tradeoff_curve(test_real[1], predictions, 'real_cnn_lstm')
+    
     
     # Run model on simulated rv data
     file1 = '../data/simulated_data/generated_data/simulated_exo_rvs'
     file2 = '../data/simulated_data/generated_data/simulated_non_exo_rvs'
     train_sim, val_sim, test_sim = load_data(file1, file2)
+    threshold_sim = 0.26
     
+    # Fit model
     model_sim = simulated_cnn_lstm_model()
-    history_sim = fit(model_sim, train_sim, val_sim, 10, 32, 0.001, 0.26)
+    history_sim = fit(model_sim, train_sim, val_sim, 10, 32, 0.001, threshold_sim)
     model_sim.save('sim_lstm_model')
+    
+    # Evaluate and generate predictions
     print('Simulated Data Model: ')
     loss_sim, acc_sim, recall_sim, precision_sim, auc_sim = evaluate(model_sim, test_sim)
-
+    predictions = (model_sim.predict(test_sim[0]) >= threshold_sim).astype(float)
+    
+    # Generate metric plots
+    confusion_matrix(test_sim[1], predictions, 'sim_cnn_lstm')
+    precision_recall_tradeoff_curve(test_sim[1], predictions, 'sim_cnn_lstm')
     
